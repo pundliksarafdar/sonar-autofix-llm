@@ -5,7 +5,9 @@ on:
   push:
     branches:
       - main
-
+env:
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  
 jobs:
   checkout:
     runs-on: ubuntu-latest
