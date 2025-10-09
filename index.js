@@ -3,7 +3,7 @@ import { AzureKeyCredential } from "@azure/core-auth";
 import fs from 'fs';
 
 const token = process.env["GITHUB_TOKEN"];
-const sonar_token = process.env['OPEN_API_TOKEN'];
+const sonar_token = process.env['SONAR_TOKEN'];
 const endpoint = "https://models.github.ai/inference";
 const model = "openai/gpt-4.1";
 
