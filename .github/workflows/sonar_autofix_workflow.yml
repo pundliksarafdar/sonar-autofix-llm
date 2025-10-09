@@ -7,7 +7,8 @@ on:
       - main
 env:
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  
+  GITHUB_TOKEN: ${{ secrets.LLM_SECRET }}
+
 jobs:
   checkout:
     runs-on: ubuntu-latest
