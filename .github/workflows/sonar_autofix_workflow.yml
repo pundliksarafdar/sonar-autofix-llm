@@ -2,9 +2,7 @@ name: Sonar Autofix Workflow
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  
 env:
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   GITHUB_TOKEN: ${{ secrets.LLM_SECRET }}
