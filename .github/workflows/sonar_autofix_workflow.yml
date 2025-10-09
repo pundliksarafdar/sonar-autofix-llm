@@ -48,13 +48,3 @@ jobs:
       - name: Push changes
         run: |
           git push --set-upstream origin ${{ env.branch_name }}
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: Automated update commit
-          title: Automated Update PR
-          body: This PR was created automatically by the workflow.
-          base: main
-          branch: ${{ env.branch_name }}
