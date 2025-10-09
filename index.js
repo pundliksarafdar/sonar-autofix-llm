@@ -103,13 +103,13 @@ async function startFixingIssues(issues) {
   console.log("Total issues found: ", issues.length);
   for (const issue of issues) {
     const filePath = issue.component.split(':')[1]; // Extract file path from component
-    const fileContent = getFileContent("./samplerepo/go-cache/",filePath);
+    const fileContent = getFileContent("./",filePath);
     const prompt = buildPrompt(issue, fileContent, 'issue');
     console.log("Prompt to send to GPT-4.1:\n", prompt);
     console.log("Fixing issue: ", issue.message);
     const fixedContent = await callAIAgent(prompt).catch(console.error);
     console.log("Fixing issue completed. Writing to file: ", filePath);
-    writeFileContent("./samplerepo/go-cache/",filePath, fixedContent);
+    writeFileContent("./",filePath, fixedContent);
   }
 }
 
@@ -117,13 +117,13 @@ async function startFixingHostspots(hotspots) {
   console.log("Total hotspots found: ", hotspots.length);
   for (const hotspot of hotspots) {
     const filePath = hotspot.component.split(':')[1]; // Extract file path from component
-    const fileContent = getFileContent("./samplerepo/go-cache/",filePath);
+    const fileContent = getFileContent("./",filePath);
     const prompt = buildPrompt(hotspot, fileContent, 'hotspot');
     console.log("Prompt to send to GPT-4.1:\n", prompt);
     console.log("Fixing hotspot: ", hotspot.message);
     const fixedContent = await callAIAgent(prompt).catch(console.error);
     console.log("Fixing hotspot completed. Writing to file: ", filePath);
-    writeFileContent("./samplerepo/go-cache/",filePath, fixedContent);
+    writeFileContent("./",filePath, fixedContent);
   }
 }
 
