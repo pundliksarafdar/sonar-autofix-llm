@@ -57,4 +57,4 @@ jobs:
           title: Automated Update PR
           body: This PR was created automatically by the workflow.
           base: main
-          head: update-branch
+          head: ${{ env.branch_name }}
