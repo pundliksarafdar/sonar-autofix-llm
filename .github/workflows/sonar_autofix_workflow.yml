@@ -1,7 +1,3 @@
-// GitHub Actions workflow to checkout code
-// Save this as .github/workflows/checkout.yml in your repo
-
-
 name: Checkout Code
 
 on:
