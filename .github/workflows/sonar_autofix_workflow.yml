@@ -1,4 +1,4 @@
-name: Checkout Code
+name: Sonar Autofix Workflow
 
 on:
   workflow_dispatch:
@@ -29,3 +29,32 @@ jobs:
 
       - name: Run index.js
         run: node index.js
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Generate random branch name
+        id: gen_branch
+        run: echo "branch_name=update-$(date +%s)-$RANDOM" >> $GITHUB_ENV
+
+      - name: Commit changes
+        run: |
+          git checkout -b ${{ env.branch_name }}
+          git add .
+          git commit -m "Automated update from workflow"
+
+      - name: Push changes
+        run: |
+          git push --set-upstream origin update-branch
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Automated update commit
+          title: Automated Update PR
+          body: This PR was created automatically by the workflow.
+          base: main
+          head: update-branch
