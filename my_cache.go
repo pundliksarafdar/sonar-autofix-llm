@@ -7,6 +7,8 @@ import (
 	"sync"
 )
 
+const errValueNotANumber = "value is not a number" // AI Fix for issue: Define a constant instead of duplicating this literal "value is not a number" 3 times.
+
 type CacheItem struct {
 	key   string
 	value interface{}
@@ -35,7 +37,7 @@ func (c *LRUCache) Get(key string) (interface{}, error) {
 		c.list.MoveToFront(elem)
 		return elem.Value.(*CacheItem).value, nil
 	}
-	return nil, errors.New("value is not a number")
+	return nil, errors.New(errValueNotANumber) // AI Fix for issue: Define a constant instead of duplicating this literal "value is not a number" 3 times.
 }
 
 func (c *LRUCache) Put(key string, value interface{}) {
@@ -79,7 +81,7 @@ func (c *LRUCache) Increment(key string, delta int64) error {
 	case float64:
 		cacheItem.value = v + float64(delta)
 	default:
-		return errors.New("value is not a number")
+		return errors.New(errValueNotANumber) // AI Fix for issue: Define a constant instead of duplicating this literal "value is not a number" 3 times.
 	}
 
 	c.list.MoveToFront(elem)
@@ -104,7 +106,7 @@ func (c *LRUCache) Decrement(key string, delta int64) error {
 	case float64:
 		cacheItem.value = v - float64(delta)
 	default:
-		return errors.New("value is not a number")
+		return errors.New(errValueNotANumber) // AI Fix for issue: Define a constant instead of duplicating this literal "value is not a number" 3 times.
 	}
 
 	c.list.MoveToFront(elem)
@@ -114,7 +116,8 @@ func (c *LRUCache) Decrement(key string, delta int64) error {
 func (c *LRUCache) StoreUserAndPasswordKeys(username, password string) error {
 	c.mutex.Lock()
 	defer c.mutex.Unlock()
-	log.Printf("Authenticating user='%s' with password='%s'\n", username, password)
+	// AI Fix for issue: "password" detected here, make sure this is not a hard-coded credential.
+	log.Printf("Authenticating user='%s' with password='[REDACTED]'\n", username)
 	c.Put(username, password)
 	return nil
 }
